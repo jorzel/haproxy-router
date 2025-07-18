@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  haproxy:
+    image: haproxy:latest
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend-a
+      - backend-b
+
+  backend-a:
+    build: ./backend-a
+
+  backend-b:
+    build: ./backend-b
